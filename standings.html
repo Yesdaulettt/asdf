@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Standings - JIHC Football Tournaments</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #0d1b2a;
+        background-color: #f9f9f9;
+        line-height: 1.6;
+      }
+
+      .dark-theme {
+        background-color: #121212;
+        color: #f1f1f1;
+      }
+
+      header {
+        background-color: #0077ff;
+        padding: 1rem;
+        color: white;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+      .nav-bar {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        padding: 1rem 0;
+        flex-wrap: wrap;
+      }
+
+      .nav-bar a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+
+      .nav-bar a:hover, .nav-bar a.active {
+        background-color: rgba(255,255,255,0.2);
+      }
+
+      .content-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+      }
+
+      .page-title {
+        text-align: center;
+        color: #0077ff;
+        margin-bottom: 2rem;
+        font-size: 2.2rem;
+      }
+
+      .dark-theme .page-title {
+        color: #4dabff;
+      }
+
+      .section {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+
+      .dark-theme .section {
+        background: #242424;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      }
+
+      .section-title {
+        color: #0077ff;
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .dark-theme .section-title {
+        color: #4dabff;
+      }
+@media (max-width: 600px) {
+  header {
+    padding: 0.8rem;
+    text-align: center;
+  }
+
+  .nav-bar {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.8rem 0;
+  }
+
+  .nav-bar a {
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .content-container {
+    padding: 0 1rem;
+  }
+
+  .page-title {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.4rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+}
+
+      /* Standings Table */
+      .standings-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+      }
+
+      .standings-table th,
+      .standings-table td {
+        padding: 1rem 0.5rem;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .dark-theme .standings-table th,
+      .dark-theme .standings-table td {
+        border-bottom-color: #333;
+      }
+
+      .standings-table th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+        color: #0077ff;
+        position: sticky;
+        top: 0;
+      }
+
+      .dark-theme .standings-table th {
+        background-color: #2d2d2d;
+        color: #4dabff;
+      }
+
+      .standings-table tr:hover {
+        background-color: #f8f9fa;
+      }
+
+      .dark-theme .standings-table tr:hover {
+        background-color: #2d2d2d;
+      }
+
+      .position {
+        font-weight: bold;
+        width: 50px;
+        text-align: center;
+      }
+
+      .team-cell {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-width: 200px;
+      }
+
+      .team-logo {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        background: #f0f0f0;
+      }
+
+      .team-name {
+        font-weight: 600;
+      }
+
+      .points {
+        font-weight: bold;
+        color: #0077ff;
+      }
+
+      .dark-theme .points {
+        color: #4dabff;
+      }
+
+      .form-cell {
+        display: flex;
+        gap: 2px;
+      }
+
+      .form-badge {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        font-weight: bold;
+        color: white;
+      }
+
+      .form-W { background-color: #28a745; }
+      .form-D { background-color: #ffc107; color: #000; }
+      .form-L { background-color: #dc3545; }
+
+      /* Top Scorer Section */
+      .top-scorers {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1rem;
+      }
+
+      .scorer-card {
+        background: linear-gradient(135deg, #0077ff, #00a8ff);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .scorer-card::before {
+        content: '⚽';
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        font-size: 4rem;
+        opacity: 0.1;
+      }
+
+      .scorer-rank {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .scorer-name {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .scorer-team {
+        opacity: 0.9;
+        margin-bottom: 0.5rem;
+      }
+
+      .scorer-goals {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      /* Best Players Section */
+      .best-players {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .player-card {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        border-left: 4px solid #0077ff;
+      }
+
+      .dark-theme .player-card {
+        background: #2d2d2d;
+        border-left-color: #4dabff;
+      }
+
+      .player-name {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #0077ff;
+      }
+
+      .dark-theme .player-name {
+        color: #4dabff;
+      }
+
+      .player-team {
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 0.5rem;
+      }
+
+      .dark-theme .player-team {
+        color: #b0b0b0;
+      }
+
+      .player-role {
+        font-size: 0.8rem;
+        background: #0077ff;
+        color: white;
+        padding: 0.2rem 0.5rem;
+        border-radius: 12px;
+        display: inline-block;
+      }
+
+      .theme-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #0077ff;
+        color: white;
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        z-index: 100;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .standings-table {
+          font-size: 0.9rem;
+        }
+        
+        .standings-table th,
+        .standings-table td {
+          padding: 0.5rem 0.25rem;
+        }
+        
+        .team-cell {
+          min-width: 150px;
+        }
+        
+        .form-cell {
+          flex-direction: column;
+          gap: 1px;
+        }
+        
+        .content-container {
+          padding: 0 1rem;
+        }
+      }
+
+      /* Footer */
+      footer {
+        background-color: #0d1b2a;
+        color: white;
+        padding: 3rem 2rem 0;
+        margin-top: 4rem;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-bottom: 2rem;
+      }
+
+      .footer-logo h3 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+        color: #0077ff;
+      }
+
+      .footer-logo p {
+        opacity: 0.8;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 4rem;
+      }
+
+      .link-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .link-group h4 {
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        color: #0077ff;
+      }
+
+      .link-group a {
+        color: white;
+        text-decoration: none;
+        margin-bottom: 0.5rem;
+        transition: color 0.3s ease;
+      }
+
+      .link-group a:hover {
+        color: #f5c518;
+      }
+.player-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.player-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1.5rem 0;
+        text-align: center;
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+
+      .logos img {
+        object-fit: cover;
+        width: 60%;
+        height: 100%;
+      }
+      .filters {
+      background: #f0f0f0;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .filters input {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    
+    #filter-btn {
+      padding: 8px 15px;
+      background: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    #player-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .scorer-player-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .player-number {
+      font-weight: bold;
+      font-size: 18px;
+      color: #4285f4;
+    }
+    
+    .player-name {
+      font-size: 20px;
+      margin: 5px 0;
+    }
+    
+    .player-club {
+      color: #666;
+      margin-bottom: 10px;
+    }
+    
+    .player-goals {
+      font-weight: bold;
+      color: #34a853;
+    }
+    
+    .player-status {
+      margin-top: 10px;
+      font-style: italic;
+      color: #ea4335;
+    }
+    
+    .error {
+      color: #ea4335;
+      padding: 10px;
+    }
+    
+    @media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .link-group {
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-logo h3 {
+    font-size: 1.5rem;
+  }
+
+  .link-group h4 {
+    font-size: 1rem;
+  }
+
+  .footer-bottom {
+    font-size: 0.8rem;
+    padding: 1rem 0;
+  }
+}
+
+
+/* ===== Responsive Enhancements ===== */
+@media (min-width: 768px) {
+  .img-sect {
+    height: 450px;
+  }
+
+  .nav-bar {
+    flex-direction: row;
+    margin: 0 50px;
+  }
+
+  .btn-par {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1200px) {
+  .img-sect {
+    width: 80vw;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+    
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="nav-bar">
+        <a href="./index.html">Home</a>
+        <a href="./ann.html">News & Transfers</a>
+        <a href="./teams.html">Teams</a>
+        <a href="./standings.html" class="active">Standings</a>
+      </nav>
+    </header>
+
+    <div class="content-container">
+      <h1 class="page-title">🏆 Spring Cup Standings</h1>
+
+      <!-- League Table -->
+      <div class="section">
+        <h2 class="section-title">📊 League Table</h2>
+        <div style="overflow-x: auto;">
+          <table class="standings-table">
+            <thead>
+              <tr>
+                <th>Pos</th>
+                <th>Team</th>
+                <th>P</th>
+                <th>Goals</th>
+                <th>GD</th>
+                <th>Pts</th>
+                <th>Form</th>
+              </tr>
+            </thead>
+            <tbody id="standings-tbody">
+              <!-- Table content will be populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Top Goalscorers -->
+      <div class="section">
+        <h2 class="section-title">⚽ Top Goalscorers</h2>
+        <div class="top-scorers" id="top-scorers">
+          <!-- Top scorers will be populated by JavaScript -->
+        </div>
+      </div> 
+
+      <div class="section">
+        <h2 class="section-title">🔍 Player Statistics</h2>
+        <div class="filters">
+          <input type="text" id="name-search" placeholder="Search by name...">
+          <input type="text" id="club-search" placeholder="Filter by club...">
+          <input type="number" id="min-goals" placeholder="Min goals">
+          <button id="filter-btn">Filter Players</button>
+        </div>
+        
+        <div id="player-container">
+          <!-- Player cards will appear here -->
+        </div>
+      </div>
+
+      <!-- Best Players -->
+      <div class="section">
+        <h2 class="section-title">⭐ Outstanding Players</h2>
+        <div class="best-players" id="best-players">
+          <!-- Best players will be populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <button class="theme-toggle" id="theme-toggle">🌓</button>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo">
+          <div id="logos" class="logos">
+            <img src="./assets of ft/spring cup logo.png" alt="Logo" loading="lazy" width="150" height="80">
+          </div>
+          <p>Building relationships through sport</p>
+        </div>
+        <div class="footer-links">
+          <div class="link-group">
+            <h4>Navigation</h4>
+            <a href="./index.html">Home</a>
+            <a href="./ann.html">Announcements</a>
+            <a href="./teams.html">Teams</a>
+            <a href="./standings.html">Standings</a>
+          </div>
+          <div class="link-group">
+            <h4>Contact</h4>
+            <a href="mailto:contact@jihc-football.kz">Email Us</a>
+            <a href="tel:+77777777777">Call Organizer</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 JIHC Football Tournaments. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Tournament data
+      const teams = [
+        {
+          "name": "FC NA'VI",
+          "played": 10,
+          "goals": "19/8",
+          "goalDifference": "+11",
+          "points": 22,
+          "form": ["W", "W", "L", "D", "L", "D", "W", "W", "W", "W"],
+          "topScorer": "Alidar (7 goals)",
+          "logo": "JAMECO STORE (3)/NaVi.png",
+          "players": ["Doszhan Zhuntai (Captain)", "Bekzat Omirzak", "Ayanadi Alshynbai", "Muratbek Daryn", "Yernur Qambar", "Alidar Saqtassyn"]
+        },
+        {
+          "name": "FC JIHC UNITED",
+          "played": 10,
+          "goals": "16/4",
+          "goalDifference": "+12",
+          "points": 19,
+          "form": ["W", "W", "D", "W", "L", "D", "W", "W", "D", "D"],
+          "topScorer": "Bekzat(8 goals)",
+          "logo": "JAMECO STORE (3)/jihc united.png",
+          "players": ["Aibol Janabek", "Aidos aga", "Alikhan 1d2", "Bekassyl 1d1", "Bekzat 2d2", "Yelzhan 1f4", "Nurtugan 2f2"]
+        },
+        {
+          "name": "FC BARYS",
+          "played": 10,
+          "goals": "11/7",
+          "goalDifference": "+4",
+          "points": 18,
+          "form": ["L", "W", "L", "D", "W", "W", "W", "W", "D", "L"],
+          "topScorer": "Arsen aga (5 goals)",
+          "logo": "JAMECO STORE (3)/Image.png",
+          "players": ["Almaz Anarbek (Captain)", "Arsen Marat", "Alibi Kanatuly", "Ali Kultay", "Gibrat 1f2", "Abylai 1d2", "Zhursin 1f4", "Zangar 1f1"]
+        },
+        {
+          "name": "FC NOMAD",
+          "played": 10,
+          "goals": "8/9",
+          "goalDifference": "-1",
+          "points": 16,
+          "form": ["W", "L", "D", "L", "W", "L", "W", "W", "D", "L"],
+          "topScorer": "Sagynai (2 goals)",
+          "logo": "JAMECO STORE (3)/Nomad.png",
+          "players": ["Nurzhan Abeyov (Captain)", "Agasultan aga", "Alibek 1f1", "Arnur 1d2", "Azamat 2f3", "Sagynai 2d1", "Zhasulan 2f2"]
+        },
+        {
+          "name": "AVALANCHE FC",
+          "played": 10,
+          "goals": "12/8",
+          "goalDifference": "+4",
+          "points": 15,
+          "form": ["L", "D", "W", "W", "D", "L", "D", "L", "W", "L"],
+          "topScorer": "Almas aga (6 goals)",
+          "logo": "JAMECO STORE (3)/avalanche.png",
+          "players": ["Almas aga(Captain)", "Aqay", "Adilet 1f2", "Yerzat 2f2", "Yeskendir 1f1", "Nurislam 2f3", "Ramazan 2d2"]
+        },
+        {
+          "name": "FC INFINITY",
+          "played": 10,
+          "goals": "9/10",
+          "goalDifference": "-1",
+          "points": 15,
+          "form": ["W", "D", "W", "W", "L", "D", "W", "L", "L", "L"],
+          "topScorer": "Zhangerkhan Alekulov (4 goals)",
+          "logo": "JAMECO STORE (3)/infinity.png",
+          "players": ["Zhangerkhan Alykulov (Captain)", "Nurdos aga", "Khaqnazar 1d2", "Imangali 2f2", "Farkhat aga", "Doszhan 1d2"]
+        },
+        {
+          "name": "ACACIA PTL",
+          "played": 10,
+          "goals": "10/10",
+          "goalDifference": "0",
+          "points": 13,
+          "form": ["W", "L", "D", "L", "L", "L", "L", "W", "W", "W"],
+          "topScorer": "M.Nurassyl (4 goals)",
+          "logo": "JAMECO STORE (3)/Acacia.png",
+          "players": ["Maqsat Galiyev (Captain)", "Yernur aga", "Sanzhar 2f2", "B. Nurassyl", "M.Nurassyl", "Ilias Bakyt", "Rustembek 2d1"]
+        },
+        {
+          "name": "FC LOS JAMECOS",
+          "played": 10,
+          "goals": "8/11",
+          "goalDifference": "-3",
+          "points": 13,
+          "form": ["W", "L", "D", "D", "W", "D", "L", "L", "L", "W"],
+          "topScorer": "Nurbakhyt (5 goals)",
+          "logo": "JAMECO STORE (3)/los jamecos.png",
+          "players": ["Gazizbek Janay (Captain)", "Danial aga", "Nuredil Yesdaulet", "Nursultan 1f1", "Nurbakhyt 1f1", "Timur 1d2", "Beknur 1f4", "Assylkenei 1f4"]
+        },
+        {
+          "name": "INVINCIBLE FC",
+          "played": 10,
+          "goals": "6/17",
+          "goalDifference": "-11",
+          "points": 8,
+          "form": ["L", "W", "L", "W", "L", "D", "L", "D", "D", "L"],
+          "topScorer": "Qanat Aldabek (3 goals)",
+          "logo": "JAMECO STORE (3)/Invincible.png",
+          "players": ["Alisher Zhunissov (Captain)", "Akimzhan Baltabay", "Alikhan Nurgali", "Dosymzhan Ayat", "Duysembai Ali", "Baqbergen Baqdaulet", "Shopan Aksultan"]
+        },
+        {
+          "name": "FC KAZFORCE",
+          "played": 10,
+          "goals": "4/10",
+          "goalDifference": "-6",
+          "points": 6,
+          "form": ["L", "D", "W", "L", "D", "L", "L", "L", "L", "L"],
+          "topScorer": "Makhdi 1f3 (2 goals)",
+          "logo": "JAMECO STORE (3)/Kazforce.png",
+          "players": ["Aidos agay (Captain)", "Nursultan aga", "Temirlan 1d1", "Makhdi 1f3", "Asqarbek 1f3", "Ali 1d1"]
+        },
+        {
+          "name": "FC MAXI-TEA",
+          "played": 10,
+          "goals": "8/17",
+          "goalDifference": "-9",
+          "points": 6,
+          "form": ["L", "L", "L", "W", "D", "D", "W", "L", "L", "L"],
+          "topScorer": "Bakhdiar aga (5 goals)",
+          "logo": "JAMECO STORE (3)/Maxi tea.png",
+          "players": ["Bakhtiar aga (Captain)", "Dias aga", "Akezhan 2d1", "Kassym-Zhomart 1d2", "Khudaybergen 2d2", "Yernar 2d2"]
+        }
+      ];
+
+      // Function to populate standings table
+      function populateStandingsTable() {
+        const tbody = document.getElementById('standings-tbody');
+        
+        teams.forEach((team, index) => {
+          const row = document.createElement('tr');
+          
+          // Position styling
+          let positionClass = '';
+          if (index < 4) positionClass = 'top-four';
+          else if (index >= teams.length - 3) positionClass = 'relegation';
+          
+          row.innerHTML = `
+            <td class="position ${positionClass}">${index + 1}</td>
+            <td>
+              <div class="team-cell">
+                <div class="team-logo" style="width: 30px; height: 30px; overflow: hidden; border-radius: 50%;">
+                  <img src="${team.logo}" alt="${team.name}" style="width: 100%; height: 100%; object-fit: contain;" />
+                </div>
+                <span class="team-name">${team.name}</span>
+              </div>
+            </td>
+            <td>${team.played}</td>
+            <td>${team.goals}</td>
+            <td>${team.goalDifference}</td>
+            <td class="points">${team.points}</td>
+            <td>
+              <div class="form-cell">
+                ${team.form.slice(-5).map(result => 
+                  `<div class="form-badge form-${result}">${result}</div>`
+                ).join('')}
+              </div>
+            </td>
+          `;
+          
+          tbody.appendChild(row);
+        });
+      }
+
+      // Function to populate top scorers
+      function populateTopScorers() {
+        const container = document.getElementById('top-scorers');
+        
+        // Sort players by goals (descending)
+        const sortedScorers = [
+          {name: "Bekzat", club: "FC JIHC UNITED", goals: 9},
+          {name: "Alidar", club: "FC NA'VI", goals: 7},
+          {name: "Almas aga", club: "AVALANCHE FC", goals: 6},
+          <!-- {name: "Arsen aga", club: "FC BARYS", goals: 5}, -->
+          <!-- {name: "Nurbakhyt", club: "FC LOS JAMECOS", goals: 5} -->
+        ].sort((a, b) => b.goals - a.goals);
+        
+        // Display top 5 scorers
+        sortedScorers.slice(0, 5).forEach((player, index) => {
+          const card = document.createElement('div');
+          card.className = 'scorer-card';
+          
+          card.innerHTML = `
+            <div class="scorer-rank">#${index + 1}</div>
+            <div class="scorer-name">${player.name}</div>
+            <div class="scorer-team">${player.club}</div>
+            <div class="scorer-goals">${player.goals} goals</div>
+          `;
+          
+          container.appendChild(card);
+        });
+      }
+
+      const SHEET_DATA_URL = 'https://script.google.com/macros/s/AKfycbyVDbtfAgy5-3vbyZrall8uXWhRqUoeDdDGE1UF2pho/dev';
+
+      // Load data when page opens
+      document.addEventListener('DOMContentLoaded', function() {
+        populateStandingsTable();
+        populateTopScorers();
+        populateBestPlayers();
+        fetchPlayerData();
+        
+        // Setup filter button
+        document.getElementById('filter-btn').addEventListener('click', filterPlayers);
+        
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+          themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-theme');
+          });
+        }
+      });
+
+      // Get data from Google Sheets
+      async function fetchPlayerData() {
+        try {
+          showLoading();
+          const response = await fetch(SHEET_DATA_URL);
+          const data = await response.json();
+          displayPlayers(data);
+        } catch (error) {
+          console.error("Error loading data:", error);
+          showError();
+          // Load sample data if real data fails
+          displayPlayers(getSampleData());
+        }
+      }
+
+      // Show player cards
+      function displayPlayers(players) {
+        const container = document.getElementById('player-container');
+        container.innerHTML = '';
+        
+        players.forEach(player => {
+          const card = document.createElement('div');
+          card.className = 'scorer-player-card';
+          
+          card.innerHTML = `
+           <div class="player-number">${player.number || ''}</div>
+
+            <div class="player-name">${player.name || 'Unknown Player'}</div>
+            <div class="player-club">${player.club || 'No Club'}</div>
+            <div class="player-goals">${player.goals || 0} goals</div>
+            <div class="player-status">${getStatusMessage(player.goals || 0)}</div>
+          `;
+          
+          container.appendChild(card);
+        });
+      }
+
+      // Filter players
+      function filterPlayers() {
+        const nameSearch = document.getElementById('name-search').value.toLowerCase();
+        const clubSearch = document.getElementById('club-search').value.toLowerCase();
+        const minGoals = parseInt(document.getElementById('min-goals').value) || 0;
+        
+        const allCards = document.querySelectorAll('.scorer-player-card');
+        
+        allCards.forEach(card => {
+          const name = card.querySelector('.player-name').textContent.toLowerCase();
+          const club = card.querySelector('.player-club').textContent.toLowerCase();
+          const goals = parseInt(card.querySelector('.player-goals').textContent);
+          
+          const nameMatch = name.includes(nameSearch);
+          const clubMatch = club.includes(clubSearch);
+          const goalsMatch = goals >= minGoals;
+          
+          card.style.display = (nameMatch && clubMatch && goalsMatch) ? 'block' : 'none';
+        });
+      }
+
+      // Helper functions
+      function getStatusMessage(goals) {
+        if (goals >= 10) return '⭐ Top Scorer!';
+        if (goals >= 5) return '👍 Solid Player';
+        if (goals >= 1) return '⚽ Scored';
+        return 'No goals yet';
+      }
+
+      function showLoading() {
+        document.getElementById('player-container').innerHTML = '<p>Loading players...</p>';
+      }
+
+      function showError() {
+        document.getElementById('player-container').innerHTML = `
+          <p class="error">Failed to load data. Showing sample players.</p>
+          <button onclick="fetchPlayerData()">Try Again</button>
+        `;
+      }
+
+      // Sample data if Google Sheets fails
+      function getSampleData() {
+        return [
+          {number: 1, name: "Bekzat", club: "FC JIHC UNITED", goals: 9},
+          {number: 2, name: "Alidar", club: "FC NA'VI", goals: 7},
+          {number: 3, name: "Almas aga", club: "AVALANCHE FC", goals: 6},
+          {number: 4, name: "Arsen aga", club: "FC BARYS", goals: 5},
+          {number: 5, name: "Nurbakhyt", club: "FC LOS JAMECOS", goals: 5}
+        ];
+      }
+
+      // Function to populate best players
+      function populateBestPlayers() {
+        const container = document.getElementById('best-players');
+        
+        // Select captains and top performers
+        const bestPlayers = [
+          { name: 'Doszhan Zhuntai', team: 'FC NA\'VI', role: 'Captain & Leader' },
+          { name: 'Bekzat', team: 'FC JIHC UNITED', role: 'Top Scorer (9 goals)' },
+          { name: 'Alidar Saqtassyn', team: 'FC NA\'VI', role: 'Star Forward (7 goals)' },
+          { name: 'Almaz Anarbek', team: 'FC BARYS', role: 'Defensive Captain' },
+          { name: 'Almas aga', team: 'AVALANCHE FC', role: 'Goal Machine (6 goals)' },
+          { name: 'Zhangerkhan Alykulov', team: 'FC INFINITY', role: 'Midfield Maestro' },
+          { name: 'Arsen Marat', team: 'FC BARYS', role: 'Key Striker (5 goals)' },
+          { name: 'Nurbakhyt', team: 'FC LOS JAMECOS', role: 'Clinical Finisher (5 goals)' }
+        ];
+
+        bestPlayers.forEach(player => {
+          const card = document.createElement('div');
+          card.className = 'player-card';
+
+          card.innerHTML = `
+            <div class="player-name">${player.name}</div>
+            <div class="player-team">${player.team}</div>
+            <div class="player-role">${player.role}</div>
+            <div class="player-more-info" style="display: none;">
+              <p>Age: 17</p>
+              <p>Stats: played well</p>
+            </div>
+          `;
+
+          card.addEventListener('click', () => {
+            const moreInfo = card.querySelector('.player-more-info');
+            moreInfo.style.display = moreInfo.style.display === 'none' ? 'block' : 'none';
+          });
+
+          container.appendChild(card);
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teams - JIHC Football Tournaments</title>
+  <link rel="stylesheet" href="teams.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav class="nav-bar">
+      <a href="./index.html">Home</a>
+      <a href="./ann.html">News & Transfers</a>
+      <a href="./teams.html" class="active">Teams</a>
+      <a href="./standings.html">Standings</a>
+    </nav>
+  </header>
+
+  <div class="teams-container">
+    <h1 class="page-title">Tournament Teams</h1>
+    
+    <div class="controls">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="team-search" placeholder="Search teams...">
+      </div>
+      <div class="filter-options">
+        <button class="filter-btn active" data-filter="all">All Teams</button>
+        <button class="filter-btn" data-filter="group-a">Group A</button>
+        <button class="filter-btn" data-filter="group-b">Group B</button>
+      </div>
+    </div>
+    
+    <div class="teams-grid" id="teams-grid">
+      <!-- Teams will be dynamically inserted here by JavaScript -->
+    </div>
+  </div>
+
+  <div class="modal" id="team-modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div class="modal-header">
+        <img id="modal-team-logo" src="" alt="Team Logo">
+        <h2 id="modal-team-name"></h2>
+        <div class="team-meta">
+          <span id="modal-team-group"></span>
+          <span id="modal-team-stadium"></span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="team-stats">
+          <div class="stat-card">
+            <i class="fas fa-trophy"></i>
+            <h3>Tournament Wins</h3>
+            <p id="modal-team-wins">0</p>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-star"></i>
+            <h3>Top Scorer</h3>
+            <p id="modal-team-scorer">-</p>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-calendar-alt"></i>
+            <h3>Founded</h3>
+            <p id="modal-team-founded">-</p>
+          </div>
+        </div>
+        <div class="team-squad">
+          <h3>Key Players</h3>
+          <ul id="modal-team-players">
+            <!-- Players will be inserted here -->
+          </ul>
+        </div>
+        <div class="team-bio">
+          <h3>Team Bio</h3>
+          <p id="modal-team-bio"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="theme-toggle" id="theme-toggle">🌓</button>
+<footer>
+  <div class="footer-content">
+    <div class="footer-logo">
+      <div id="logos" class="logos">
+        <img src="./assets of ft/spring cup logo.png" alt="Logo" loading="lazy" width="150" height="80">
+    </div>
+      <p>Building relationships through sport</p>
+    </div>
+    <div class="footer-links">
+      <div class="link-group">
+        <h4>Navigation</h4>
+        <a href="./index.html">Home</a>
+        <a href="./ann.html">Announcements</a>
+        <a href="./teams.html">Teams</a>
+        <a href="./standings.html">Standings</a>
+      </div>
+      <div class="link-group">
+        <h4>Contact</h4>
+        <a href="mailto:contact@jihc-football.kz">Email Us</a>
+        <a href="tel:+77777777777">Call Organizer</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 JIHC Football Tournaments. All rights reserved.</p>
+  </div>
+</footer>
+  <script src="./teams.js">
+
+  </script>
+</body>
+</html>

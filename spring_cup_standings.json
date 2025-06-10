@@ -1,0 +1,330 @@
+[
+  {
+    "name": "FC NA'VI",
+    "played": 10,
+    "goals": "19/8",
+    "goalDifference": "+11",
+    "points": 22,
+    "form": [
+      "W",
+      "W",
+      "L",
+      "D",
+      "L",
+      "D",
+      "W",
+      "W",
+      "W",
+      "W"
+    ],
+    "topScorer": "Alidar (7 goals)",
+    "logo": "JAMECO STORE (3)/NaVi.png",
+    "players": [
+      "Doszhan Zhuntai (Captain)",
+      "Bekzat Omirzak",
+      "Ayanadi Alshynbai",
+      "Muratbek Daryn",
+      "Yernur Qambar"
+      "Alidar Saqtassyn"
+    ]
+  },
+  {
+    "name": "FC JIHC UNITED",
+    "played": 10,
+    "goals": "16/4",
+    "goalDifference": "+12",
+    "points": 19,
+    "form": [
+      "W",
+      "W",
+      "D",
+      "W",
+      "L",
+      "D",
+      "W",
+      "W",
+      "D",
+      "D"
+    ],
+    "topScorer": "Bekzat(8 goals)",
+    "logo": "JAMECO STORE (3)/jihc united.png",
+    "players": [
+      "Aibol  Janabek",
+      "Aidos aga",
+      "Alikhan 1d2",
+      "Bekassyl 1d1",
+      "Bekzat 2d2",
+      "Yelzhan 1f4",
+      "Nurtugan 2f2"
+    ]
+  },
+  {
+    "name": "FC BARYS",
+    "played": 10,
+    "goals": "11/7",
+    "goalDifference": "+4",
+    "points": 18,
+    "form": [
+      "L",
+      "W",
+      "L",
+      "D",
+      "W",
+      "W",
+      "W",
+      "W",
+      "D",
+      "L"
+    ],
+    "topScorer": "Arsen aga (5 goals)",
+    "logo": "JAMECO STORE (3)/Image.png",
+    "players": [
+      "Almaz Anarbek (Captain)",
+      "Arsen Marat",
+      "Alibi Kanatuly",
+      "Ali Kultay",
+      "Gibrat 1f2",
+      "Abylai 1d2",
+      "Zhursin 1f4",
+      "Zangar 1f1"
+    ]
+  },
+  {
+    "name": "FC NOMAD",
+    "played": 10,
+    "goals": "8/9",
+    "goalDifference": "-1",
+    "points": 16,
+    "form": [
+      "W",
+      "L",
+      "D",
+      "L",
+      "W",
+      "L",
+      "W",
+      "W",
+      "D",
+      "L"
+    ],
+    "topScorer": "Sagynai (2 goals)",
+    "logo": "JAMECO STORE (3)/Nomad.png",
+    "players": [
+      "Nurzhan Abeyov (Captain)",
+      "Agasultan aga",
+      "Alibek 1f1",
+      "Arnur 1d2",
+      "Azamat 2f3",
+      "Sagynai 2d1",
+      "Zhasulan 2f2"
+    ]
+  },
+  {
+    "name": "AVALANCHE FC",
+    "played": 10,
+    "goals": "12/8",
+    "goalDifference": "+4",
+    "points": 15,
+    "form": [
+      "L",
+      "D",
+      "W",
+      "W",
+      "D",
+      "L",
+      "D",
+      "L",
+      "W",
+      "L"
+    ],
+    "topScorer": "Almas aga (6 goals)",
+    "logo": "path/to/logo.png",
+    "players": [
+      "Almas aga(Captain)",
+      "Aqay",
+      "Adilet 1f2",
+      "Yerzat 2f2",
+      "Yeskendir 1f1",
+      "Nurislam 2f3",
+      "Ramazan 2d2"
+    ]
+  },
+  {
+    "name": "FC INFINITY",
+    "played": 10,
+    "goals": "9/10",
+    "goalDifference": "-1",
+    "points": 15,
+    "form": [
+      "W",
+      "D",
+      "W",
+      "W",
+      "L",
+      "D",
+      "W",
+      "L",
+      "L",
+      "L"
+    ],
+    "topScorer": "Zhangerkhan Alekulov (4 goals)",
+    "logo": "JAMECO STORE (3)/infinity.png",
+    "players": [
+      "Zhangerkhan Alykulov (Captain)",
+      "Nurdos aga",
+      "Khaqnazar 1d2",
+      "Imangali 2f2",
+      "Farkhat aga",
+      "Doszhan 1d2"
+    ]
+  },
+  {
+    "name": "ACACIA PTL",
+    "played": 10,
+    "goals": "10/10",
+    "goalDifference": "0",
+    "points": 13,
+    "form": [
+      "W",
+      "L",
+      "D",
+      "L",
+      "L",
+      "L",
+      "L",
+      "W",
+      "W",
+      "W"
+    ],
+    "topScorer": "M.Nurassyl (4 goals)",
+    "logo": "JAMECO STORE (3)/Acacia.png",
+    "players": [
+      "Maqsat Galiyev (Captain)",
+      "Yernur aga",
+      "Sanzhar 2f2",
+      "B. Nurassyl",
+      "M.Nurassyl",
+      "Ilias Bakyt",
+      "Rustembek 2d1"
+    ]
+  },
+  {
+    "name": "FC LOS JAMECOS",
+    "played": 10,
+    "goals": "8/11",
+    "goalDifference": "-3",
+    "points": 13,
+    "form": [
+      "W",
+      "L",
+      "D",
+      "D",
+      "W",
+      "D",
+      "L",
+      "L",
+      "L",
+      "L"
+    ],
+    "topScorer": "Nurbakhyt (5 goals)",
+    "logo": "JAMECO STORE (3)/los jamecos.png",
+    "players": [
+      "Gazizbek Janay (Captain)",
+      "Danial aga",
+      "Nuredil Yesdaulet",
+      "Nursultan 1f1",
+      "Nurbakhyt 1f1",
+      "Timur 1d2",
+      "Beknur 1f4",
+      "Assylkenei 1f4"
+    ]
+  },
+  {
+    "name": "INVINCIBLE FC",
+    "played": 10,
+    "goals": "6/17",
+    "goalDifference": "-11",
+    "points": 8,
+    "form": [
+      "L",
+      "W",
+      "L",
+      "W",
+      "L",
+      "D",
+      "L",
+      "D",
+      "D",
+      "L"
+    ],
+    "topScorer": "Qanat Aldabek (3 goals)",
+    "logo": "JAMECO STORE (3)/Invincible.png",
+    "players": [
+      "Alisher Zhunissov (Captain)",
+      "Akimzhan Baltabay",
+      "Alikhan Nurgali",
+      "Dosymzhan Ayat",
+      "Duysembai Ali",
+      "Baqbergen Baqdaulet",
+      "Shopan Aksultan"
+    ]
+  },
+  {
+    "name": "FC KAZFORCE",
+    "played": 10,
+    "goals": "4/10",
+    "goalDifference": "-6",
+    "points": 6,
+    "form": [
+      "L",
+      "D",
+      "W",
+      "L",
+      "D",
+      "L",
+      "L",
+      "L",
+      "L",
+      "L"
+    ],
+    "topScorer": "Makhdi 1f3 (2 goals)",
+    "logo": "JAMECO STORE (3)/Kazforce.png",
+    "players": [
+      "Aidos agay (Captain)",
+      "Nursultan aga",
+      "Temirlan 1d1",
+      "Makhdi 1f3",
+      "Asqarbek 1f3",
+      "Ali 1d1"
+    ]
+  },
+  {
+    "name": "FC MAXI-TEA",
+    "played": 10,
+    "goals": "8/17",
+    "goalDifference": "-9",
+    "points": 6,
+    "form": [
+      "L",
+      "L",
+      "L",
+      "W",
+      "D",
+      "D",
+      "W",
+      "L",
+      "L",
+      "L"
+    ],
+    "topScorer": "Bakhdiar aga (5 goals)",
+    "logo": "JAMECO STORE (3)/Maxi tea.png",
+    "players": [
+      "Bakhtiar aga (Captain)",
+      "Dias aga",
+      "Akezhan 2d1",
+      "Kassym-Zhomart 1d2",
+      "Khudaybergen 2d2",
+      "Yernar 2d2"
+    ]
+  }
+]
